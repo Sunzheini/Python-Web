@@ -29,8 +29,16 @@ Django izpolzva MTV
 
 """
 1. python manage.py startapp task - syzdava papka za app task
+ima go v tools / run manage.py
+i pishesh samo startapp task
+
+
 2. sled tova papkata q premesti v papkata na proekta kydeto e manage.py
+drag and drop i ok na refaktor
+
+
 3. registrirame task v settings.INSTALLED_APPS
+dobavqme go nakraq kato 'djangoProject102.departments'
 """
 
 # Setting up a database
@@ -78,10 +86,45 @@ Cqlata biznes logika
 Shte govorim za function based views
 task.views.py
 define function
-create djangoProject101/task/urls.py
-inside create variable urlpatterns
 
-inside djangoProject101/urls.py (glavniq urls) syshto pishem
+
+4. create djangoProject101/task/urls.py
+t.e. syzdavame urls.py v papkata na app-a
+inside add: urlpatterns = ()
+t.e. syzdavame prazen tuple
+
+
+5. inside djangoProject101/urls.py (glavniq urls)
+v urlpatterns dobavqme: 
+    path('departments/', include('djangoProject102.departments.urls'))
+
+
+6. inside views.py
+create a function (view): 
+    def show_departments(request, *args, **kwargs):
+        body = f'path: {request.path}, args={args}, kwargs={kwargs}'
+        return HttpResponse(body)
+
+    def show_department_details(request, department_id):
+        body = f'path: {request.path}, id: {department_id}'
+        return HttpResponse(body)
+
+
+7. v url.py
+v urlpatterns dobavqme: 
+    path('', sample_view),
+
+
+8. mojem da dobavqme i parametri, v takiva skobi: <>
+v urlpatterns dobavqme:
+    path('<department_id>/', show_departments),
+    path('int/<int:department_id>/', show_department_details),
+    
+tipovete sa: str, int, slug (human readable string), path, uuid
+
+otgore nad vsqko moje da slojish i linka, za da go cykash
+
+
 
 http://127.0.0.1:8000/task/
 
@@ -91,9 +134,22 @@ http://127.0.0.1:8000/task/
 """
 imame django templates koito generirat dinamichno html
 
-syzdavame index.html v papka templates
-pravim funkciq vyv views.py
-dobavqme v urls.py
+
+9. syzdavame .....html v papka templates
+v nego ima:
+    <h1>{{ method }}</h1>
+    <h2>{{ order_by }}</h2>
+
+
+10. izpolzvame s render vyv views.py
+
+def show_departments(request, *args, **kwargs):
+    context = {
+        'method': request.method,
+        'order_by': request.GET.get('order_by', 'name'),
+    }
+    return render(request, 'departments/all.html', context)
+    
 
 put link in index.html:
 <!-- CSS only -->
