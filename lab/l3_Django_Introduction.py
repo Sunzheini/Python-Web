@@ -100,33 +100,48 @@ v urlpatterns dobavqme:
 
 
 6. inside views.py
-create a function (view): 
-    def show_departments(request, *args, **kwargs):
-        body = f'path: {request.path}, args={args}, kwargs={kwargs}'
-        return HttpResponse(body)
 
-    def show_department_details(request, department_id):
-        body = f'path: {request.path}, id: {department_id}'
-        return HttpResponse(body)
+create a function (view)
+more info @ l4
 
+a. 
+def show_departments(request, *args, **kwargs):
+    body = f'path: {request.path}, args={args}, kwargs={kwargs}'
+    return HttpResponse(body)
 
-7. v url.py
-v urlpatterns dobavqme: 
-    path('', sample_view),
+def show_department_details(request, department_id):
+    body = f'path: {request.path}, id: {department_id}'
+    return HttpResponse(body)
 
-
-8. mojem da dobavqme i parametri, v takiva skobi: <>
+b. 
+mojem da dobavqme i parametri, v takiva skobi: <>
 v urlpatterns dobavqme:
     path('<department_id>/', show_departments),
     path('int/<int:department_id>/', show_department_details),
     
 tipovete sa: str, int, slug (human readable string), path, uuid
 
+c.
+view s render i promenlivi
+  
+def index(request):
+    context = {
+        'title': 'SoftUni Homepage',
+        'value': random.random(),                           # promenliva, koqto vizulizirame v template
+        'order_by': request.GET.get('order_by', 'name'),    # name e default parameter
+        'info': {'address': 'Sofia'},                       # nested dict
+    }
+    return render(request, 'index.html', context)
+# 'index.html' e template-a, koito shte napravim po-nadolu
+
+
+7. v url.py
+v urlpatterns dobavqme: 
+    path('', index, name='index'),
+    
 otgore nad vsqko moje da slojish i linka, za da go cykash
+http://127.0.0.1:8000/
 
-
-
-http://127.0.0.1:8000/task/
 
 """
 
@@ -135,20 +150,14 @@ http://127.0.0.1:8000/task/
 imame django templates koito generirat dinamichno html
 
 
-9. syzdavame .....html v papka templates
+10. syzdavame .....html v papka templates
+hubavo e da se kazva kakto view-to
+
 v nego ima:
-    <h1>{{ method }}</h1>
-    <h2>{{ order_by }}</h2>
+    <h1>{{ title }}: {{ value }}</h1>
+    {{ info.address }}      # za nested dict
 
 
-10. izpolzvame s render vyv views.py
-
-def show_departments(request, *args, **kwargs):
-    context = {
-        'method': request.method,
-        'order_by': request.GET.get('order_by', 'name'),
-    }
-    return render(request, 'departments/all.html', context)
     
 
 put link in index.html:
