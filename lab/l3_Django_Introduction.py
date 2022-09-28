@@ -130,9 +130,15 @@ def index(request):
         'value': random.random(),                           # promenliva, koqto vizulizirame v template
         'order_by': request.GET.get('order_by', 'name'),    # name e default parameter
         'info': {'address': 'Sofia'},                       # nested dict
+        'student': Student('Daniel', 40),                   # moje info ot klas
     }
     return render(request, 'index.html', context)
 # 'index.html' e template-a, koito shte napravim po-nadolu
+
+d. 
+redirect
+def redirect_to_home(request):
+return redirect('index')                                    # izpolzvame name='index'
 
 
 7. v url.py
