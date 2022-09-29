@@ -98,15 +98,113 @@ sega moje da se izpolzva v template-a
 """
 
 
-# custom tags - -1:22
+# custom tags
+"""
+    - simple tag - processes data and returns a string
+
+slagame gi v application-a v package "templatetags" 
+vytre fail tags.py
+
+
+register = Library()
+
+@register.simple_tag(name='student_info')
+def show_student_info(student: Student):
+    return f"Hello, i am {student.name}"
+
+
+sega moje da se izpolzva v template-a
+{% load tags %}                        # trqbva da se importira imeto na faila v template-a
+
+{% student_info student=student %}             # odd is the name of the filter
+
+
+    # another 1
+
+@register.simple_tag(name='sample_tag')
+def sample_tag(*args, **kwargs):
+    return ', '.join(str(x) for x in (list(args) + list(kwargs.items())))
+
+
+{% sample_tag %}
+{% sample_tag 17, 'Daniel', True %}
+{% sample_tag department='engineering' %}
+
+
+    - inclusion tag - processes data and returns a rendered template (kato mini view)
+
+v templates direktoriq tags i fail nav.html
+
+v tags.py:
+@register.inclusion_tag('tags/nav.html' name='app_nav')
+def general_nav(*args):
+    context = {
+        'url_names': args,
+    }
+    return
+
+v index.html:
+{% app_nav 'index' 'redirect_to_home' %}
+
+
+moje da polchavame i context s takes_context=True:
+@register.inclusion_tag('tags/nav.html' name='app_nav', takes_context=True)
+
 """
 
+
+# Template inheritance
+"""
+pravim bazov template kydeto slagame placeholders (blocks)
+v papka templates pravim papka base i pravim base.html
+
+placeholder: 
+{% block page_content %}        # page_content e imeto na bloka
+..
+{% endblock %}
+
+v index.html (koito nasledqva bazoviq)
+{% extends 'base/base.html' %}
+
+{% block page_content %}        
+ pishem nashiq text, koito overwriteva base-a
+{% endblock %}
+
+"""
+
+# include template snippets
+"""
 """
 
 
+# statis files in Django
+"""
+statis files sa vsichki neshta v edin sait razlichni ot html koito se vizualizirat
+css, javascript, kartinki
+
+django ne se griji za statichnite failove po vreme na production
+
+pravim papka staticfiles
+vytre pravim site.css
+v settings.py:
+    STATIC_URL = '/static'  - pytq na koito iskame da gi dostypvame
+    STATICFILES_DIRS = (    - direktoriiv koito ima statichni failove
+        BASE_DIR / 'staticfiles',
+    )
+
+posle vkarvame css-a v html-a s:
+{% load static %}
+<link rel="stylesheet" href="{% static 'site.css' %}">
+
+"""
+
+# Bootstrap - biliboteka, koqto dava gotovi neshta za vizualizaciq
+"""
+include-vame css-a ot saita na bootstrap kakto gornoto
 
 
 
+"""
 
 
 
