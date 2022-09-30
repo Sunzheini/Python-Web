@@ -116,7 +116,7 @@ def show_student_info(student: Student):
 sega moje da se izpolzva v template-a
 {% load tags %}                        # trqbva da se importira imeto na faila v template-a
 
-{% student_info student=student %}             # odd is the name of the filter
+{% student_info student=student %}             # name of the tag student_info
 
 
     # another 1
@@ -172,8 +172,13 @@ v index.html (koito nasledqva bazoviq)
 
 """
 
-# include template snippets
+# include template snippets (partial-i)
 """
+create an html and include it
+
+{% include '...' %}
+
+mogat da vzimat i parametri
 """
 
 
@@ -183,6 +188,7 @@ statis files sa vsichki neshta v edin sait razlichni ot html koito se vizualizir
 css, javascript, kartinki
 
 django ne se griji za statichnite failove po vreme na production
+
 
 pravim papka staticfiles
 vytre pravim site.css
