@@ -110,7 +110,67 @@ Database --> Refresh
 Click on "1 of 3" next to employees_db and select default schema
 
 
-6. -2:21:25 (1:46:11)
+6. Admin
+
+dobavqneto na pyrviq potrebitel stava s komanda
+    python manage.py createsuperuser
+
+daniel, daniel_zorov@abv.bg, Maimun06
+http://127.0.0.1:8000/admin/
+
+
+7. In admin.py:
+
+@admin.register(Employees)
+class EmployeeAdmin(admin.ModelAdmin):
+    pass
+
+Now this model is enabled in django admin
+You can edit data in the Employees table from admin
+
+* Ako napravim __str__ v Employess modela, toi se pokazva pri spisyka na employees v admin
+
+
+8. * You can reverse a migration
+
+
+9. * Additional configuration of fields
+
+    field = models............(
+        unique = True,          # vsichki zapisi v kolonata sa unikalni
+        default = 1,
+        null = True             # empty values will be stored as null, False by default
+        blank = True,           # if true the field is allowed to be blank, False by default
+        primary_key = True,
+
+        choices = (
+            ('jr', 'Junior'),       # pyrvoto se zapisva a vtoroto se pokazva kato izbirash
+            ('reg', 'Regular'),
+        ),
+
+        verbose_name = 'Seniority level',   # izpisva se vmesto 'field' v admin
+
+        editable = False,
+
+    )
+
+10. Relationships -1:09:30
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

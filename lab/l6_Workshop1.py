@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 7. Subdirectories in 'templates' for each APP with the name of the app
 8. Move html files in the respective subdirectories of 'templates'
 9. 404.html and similar go to the main directory 'templates'
+
 10. Go to views.py of each APP and create view for each template
     * don't use names for views like 'login', 'register', etc.
     ** for home, the view name is 'index'
