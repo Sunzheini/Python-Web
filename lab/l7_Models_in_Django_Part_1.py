@@ -151,18 +151,67 @@ You can edit data in the Employees table from admin
         verbose_name = 'Seniority level',   # izpisva se vmesto 'field' v admin
 
         editable = False,
-
     )
 
-10. Relationships -1:09:30
+
+10. Relationship one-to-many
+
+    first create another table and migrate
+
+    then in the first table(class) make the connection and migrate:
+
+        department = models.ForeignKey(
+            Department,                     # kym koq dr tablica sochi
+            on_delete=models.CASCADE,       # kato iztriem department iztriva employee-to
+        )
+
+    * on_delete=models.SET_NULL, null=True
+    * on_delete=models.RESTRICT        # ne mojesh da iztriesh department ako neshto e zakacheno kym nego
 
 
+11. Relationship many-to-many
+
+    project = models.ManyToManyField(Project)
+
+    syzdava i mejninna tablica avtomatichno
 
 
+12. One-to-One
+
+    employee = models.OneToOneField(
+        Employee,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
 
 
+13. Custom Django Admin Site
 
+in:
 
+@admin.register(Employees)
+class EmployeeAdmin(admin.ModelAdmin):
+    pass
+
+we can add:
+
+    list_display = ('pk', 'fist_name', 'last_name', 'level')    # pokazva spisyk
+    list_filter = ('level',)                                    # list filter
+    search_fields = ('fist_name', 'last_name')                  # search
+
+    fieldsets = (                                               # podrejda gi v sekcii
+        (
+            'Personal Info',
+            {
+                'fields': ('first_name', 'last_name'),
+            }
+        )
+    ),
+
+moje i custom neshta kato metodi:
+
+    def department(self, obj):
+        return obj.department.name
 
 
 
