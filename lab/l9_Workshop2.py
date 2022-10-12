@@ -286,7 +286,14 @@ class PhotoLike(models.Model):
     35
 
 
-53. Changes in view - 2:47:38
+53. Changes in view, urls, models and htmls
+
+
+
+
+
+
+
 
 
 
