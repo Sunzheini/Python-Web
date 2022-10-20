@@ -63,9 +63,19 @@ clean() metodi - transform data into desired format (lower / upper)
 # Media Files - 58:28
 
 """
+media files - stitichni failove kacheni ot potrebitelite (te mogat da gi kachvat)
+
+failovete gi pravi na string i gi prashta na syrvyra
 
 
+uninstall PIL then install Pillow
+Pillow - poddyrja uploadvane na takiva failove
 
+
+profile_image = models.ImageField(null=True, blank=False, upload_to'')
+profile_image = models.FileField(null=True, blank=False, upload_to'')    # za vsqkakvi failove
+
+upload_to - v koq direktoriq
 """
 
 
