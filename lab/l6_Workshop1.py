@@ -3,7 +3,7 @@
 
 """
 1. Create Project
-2. Create apps: python manage.py startapp APP_NAME
+2. Create apps: python manage.py startapp APP_NAME # i.e. web
 3. Move all APPs to project folder
 4. Create APP_NAME/urls.py with empty 'urlpatterns'
 urlpatterns = (
@@ -14,7 +14,7 @@ urlpatterns = (
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('accounts/', include('petstagram.accounts.urls')),
+    path('accounts/', include('petstagram.accounts.urls')),   # ili path('', include('exam_prep_web.urls')),
 ]
 
 6. Add APP_NAME to 'INSTALLED_APPS' in settings.py
@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'petstagram.accounts',
+    'petstagram.accounts',      # project_name / app_name
 ]
 
 7. Subdirectories in 'templates' for each APP with the name of the app
@@ -92,13 +92,13 @@ STATICFILES_DIRS = (
     BASE_DIR / 'staticfiles',       # files are located @ staticfiles
 )
 
-15. In each html the path must point to statis/ not staticfiles/ !
+15. In each html the path must point to static/ not staticfiles/ !
 i.e. href="/static/css/styles.css">
 
 16. Combine the common parts: using Template Inheritance:
     make directory 'base' in 'templates'
     make base.html
-    put inside the common things, without main, where we replace the contents of main with a block:
+    put inside base.html the common things, without main, where we replace the contents of main with a block:
 
 <main>
     {% block page_content %}
@@ -115,28 +115,19 @@ i.e. href="/static/css/styles.css">
 {% endblock %}
 
     do it for all htmls, except base.html
-    in base.html change:
 
+
+    in base.html change all links to static:
         href="/static/css/styles.css">
 
     to:
-
-        href="{% static 'css/styles.css' %}"
+        href="{% static '/css/styles.css' %}"   # keep `/css/styles.css` from above
 
     and on top:
-
         {% load static %}
 
-    the the same with:
-
-        href="/static/images/free-30-instagram-stories-icons23_122570.png"
-        href="{% static 'images/free-30-instagram-stories-icons23_122570.png' %}"
-
-        src="/static/images/free-30-instagram-stories-icons23_122570.png" alt="img1"
-        src="{% static 'images/free-30-instagram-stories-icons23_122570.png'%}"
-                     alt="img1">
-
     the same with all html files, also press load static
+
 
 17. In 'base' make folder 'partials' and inside - nav.html
 

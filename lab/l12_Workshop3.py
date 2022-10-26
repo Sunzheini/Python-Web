@@ -2,9 +2,9 @@
 
 
 """
-1. Create forms.py in pets/
+54. Create forms.py in pets/
 
-2. Add:
+55. Add:
 
 from django import forms # not forms.forms!!!
 
@@ -49,7 +49,7 @@ class PetCreateForm(PetBaseForm):
     pass
 
 
-3. Change 'add_pet' in pets/views.py to:
+56. Change 'add_pet' in pets/views.py to:
 
 def add_pet(request):
     if request.method == 'GET':
@@ -65,7 +65,7 @@ def add_pet(request):
     return render(request, 'pets/pet-add-page.html', context)
 
 
-4. Change the template 'pet-add-page.html'
+57. Change the template 'pet-add-page.html'
 
 change this:
 
@@ -99,7 +99,7 @@ to this:
         <!-- End Add Pet Form -->
 
 
-5. pravim edit:
+58. pravim edit:
 
 def edit_pet(request, username, pet_slug):
     pet = Pet.objects.filter(slug=pet_slug) \
@@ -119,7 +119,7 @@ def edit_pet(request, username, pet_slug):
     return render(request, 'pets/pet-edit-page.html', context)
 
 
-6. pet-edit-page.html:
+59. pet-edit-page.html:
 
         <!-- Start Edit Pet From -->
         <form action="{% url 'edit pet' username=username pet_slug=pet_slug %}" method="post">
@@ -130,7 +130,7 @@ def edit_pet(request, username, pet_slug):
         <!-- End Edit Pet Form -->
 
 
-7. delete formata
+60. delete formata
 
 def delete_pet(request, username, pet_slug):
     pet = Pet.objects.filter(slug=pet_slug) \
@@ -150,7 +150,7 @@ def delete_pet(request, username, pet_slug):
     return render(request, 'pets/pet-delete-page.html', context)
 
 
-8. v html
+61. v html
 
         <!-- Starts Delete Pet Form -->
         <form method="post" action="{% url 'delete pet' username=username pet_slug=pet_slug %}">
@@ -164,7 +164,7 @@ def delete_pet(request, username, pet_slug):
         <!-- End Delete Pet Form -->
 
 
-8. configurirame dopylnitelno delete-a v forms:
+62. configurirame dopylnitelno delete-a v forms:
 
 class PetDeleteForm(DisabledFormMixin, PetBaseForm):
     disabled_fields = ('name', 'date_of_birth', 'personal_photo')
@@ -181,7 +181,7 @@ class PetDeleteForm(DisabledFormMixin, PetBaseForm):
         return self.instance
 
 
-9. Prodyljavame edit:
+63. Prodyljavame edit:
 
 class PetEditForm(DisabledFormMixin, PetBaseForm):
     disabled_fields = ('name', )
@@ -191,7 +191,7 @@ class PetEditForm(DisabledFormMixin, PetBaseForm):
         self._disable_fields()
 
 
-10. Create form_mixins.py in core/
+64. Create form_mixins.py in core/
 
 class DisabledFormMixin:
     disabled_fields = ()
@@ -210,7 +210,7 @@ class DisabledFormMixin:
                 field.widget.attrs['readonly'] = 'readonly'
 
 
-11. Media files:
+65. Media files:
 
 v settings.py:
 
@@ -247,14 +247,14 @@ if settings.DEBUG:
     )
 
 
-12. photos / models.py:
+66. photos / models.py:
 
 upload_to='pet_photos/',
 
 migrations and migrate
 
 
-13. photo-item.html:
+67. photo-item.html:
 
         </div>
     </div>
@@ -267,9 +267,9 @@ migrations and migrate
         <div class="actionBtns">
 
 
-14. in photos.photo database edit the file paths to begin with `pet_photos/`
+68. in photos.photo database edit the file paths to begin with `pet_photos/`
 
-15. create photos/forms.py ...
+69. create photos/forms.py ...
 
 
 
