@@ -25,6 +25,84 @@ class Pet(models.Model):
         blank=True,
     )
 
+if the field is required:
+null=False,
+blank=False,
+
+if the field is optional:
+null=True,
+blank=True,
+
+integer field >= 0:
+age = models.PositiveIntegerField()
+
+inache za float >= 0.0:
+validators=(
+            validators.MinValueValidator(0.0),
+        ),
+
+for min values:
+        validators=(
+            validators.MinLengthValidator
+        )
+
+unikalen:
+unique=True,
+
+
+kogato imame choice:
+    POP_MUSIC = 'Pop Music'
+    JAZZ_MUSIC = 'Jazz Music'
+    RNB_MUSIC = 'R&B Music'
+    ROCK_MUSIC = 'Rock Music'
+    COUNTRY_MUSIC = 'Country Music'
+    DANCE_MUSIC = 'Dance Music'
+    HIP_HOP_MUSIC = 'Hip Hop Music'
+    OTHER_MUSIC = 'Other Music'
+
+    MUSICS = (
+        (POP_MUSIC, POP_MUSIC),
+        (JAZZ_MUSIC, JAZZ_MUSIC),
+        (RNB_MUSIC, RNB_MUSIC),
+        (ROCK_MUSIC, ROCK_MUSIC),
+        (COUNTRY_MUSIC, COUNTRY_MUSIC),
+        (DANCE_MUSIC, DANCE_MUSIC),
+        (HIP_HOP_MUSIC, HIP_HOP_MUSIC),
+        (OTHER_MUSIC, OTHER_MUSIC),
+    )
+
+    genre = models.CharField(
+        max_length=MAX_GENRE_NAME_LENGTH,
+        null=False,
+        blank=False,
+        choices=MUSICS,
+    )
+
+
+if 	The username can consist only of letters, numbers, and underscore ("_"):
+def validate_only_alphanumeric(value):
+    for ch in value:
+        if not ch.isalnum():
+            raise exceptions.ValidationError("Ensure this value contains only letters, numbers, and underscore.")
+
+class Profile(models.Model):
+    MIN_USERNAME_LENGTH = 2
+    MAX_USERNAME_LENGTH = 15
+
+    username = models.CharField(
+        max_length=MAX_USERNAME_LENGTH,
+        validators=(
+            validators.MinLengthValidator(MIN_USERNAME_LENGTH),
+            validate_only_alphanumeric,
+        ),
+        null=False,
+        blank=False,
+    )
+
+
+after each model: python manage.py makemigrations
+
+
 25. Replace in settings.py:
 
 DATABASES = {
@@ -48,6 +126,7 @@ DATABASES = {
     Rightclick on postgres@localhost --> New --> Database --> Name it --> Ok
 
 28. python manage.py migrate
+
 
 29. python manage.py makemigrations
 

@@ -60,7 +60,7 @@ def add_pet(request):
             form.save()
             return redirect('details user', pk=1)
     context = {
-        'form': PetCreateForm(),
+        'form': form,
     }
     return render(request, 'pets/pet-add-page.html', context)
 

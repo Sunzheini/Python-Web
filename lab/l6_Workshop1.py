@@ -105,10 +105,13 @@ i.e. href="/static/css/styles.css">
     {% endblock %}
 </main>
 
+
     put at the top:
 
 {% extends 'base/base.html' %}
 {% block page_content %}
+
+    -- here keep the content of the page --
 
     put at the botton:
 
